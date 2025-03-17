@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # your other URLs
+    path('donation/',views.donationView.as_view()),
+    path('searchBlood/<str:blood_type>/',views.searchDonarUsingBloodType.as_view()),
+]
