@@ -55,26 +55,12 @@ class RegisterApiView(APIView):
 
 class DetailsUserView(APIView):
     def get(self,request,pk):
-        queryset = Registration.objects.all().order_by('created')
-        queryset = list(queryset)  
-        left = 0
-        right = len(queryset) - 1
-        found = False
+        queryset = Registration.objects.get(pk=pk)
+        serializer = userDetailsSerializer(queryset, many=False)
+        return Response(serializer.data)
+    
 
-        while left <= right:
-            mid = (left + right) // 2 
-            if queryset[mid].user.id == pk:
-                found = True
-                serializer = userDetailsSerializer(queryset[mid], many=False)
-                return Response(serializer.data)
-            if queryset[mid].id > pk:
-                right = mid - 1  
-            else:
-                left = mid + 1  
-        if not found:
-            return Response({"message": "Not found"}, status=404)
-
-        return Response("data") 
+        
 
 
 
