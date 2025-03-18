@@ -11,9 +11,15 @@ from rest_framework import permissions
 class donationView(APIView):
     # permission_classes=[permissions.IsAuthenticated]
     def post(self,request):
+        print("data")
+        print(request.user)
         serializer = SerializerDonation(data=request.data)
+        print(request.data.get('user_id'))
         if serializer.is_valid():
-            serializer.save()
+            obj = serializer.save()
+            obj.user = request.user
+            obj.save()
+            
             return Response('Donation Done')
         else:
             return Response(serializer.errors)

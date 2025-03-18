@@ -40,6 +40,7 @@ class RegisterApiView(APIView):
             token = default_token_generator.make_token(obj)
             uid = urlsafe_base64_encode(force_bytes(obj.pk))
             obj.save()
+            print("OBJ",obj)
             return Response("ok")
         
         else:
@@ -55,8 +56,9 @@ class RegisterApiView(APIView):
 
 class DetailsUserView(APIView):
     def get(self,request,pk):
-        queryset = Registration.objects.get(pk=pk)
-        serializer = userDetailsSerializer(queryset, many=False)
+        print(User.objects.get(pk=pk))
+        obj = Registration.objects.get(user=pk)
+        serializer = userDetailsSerializer(obj, many=False)
         return Response(serializer.data)
     
 

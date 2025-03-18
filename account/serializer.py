@@ -67,10 +67,11 @@ class userAllDataSerializer(serializers.ModelSerializer):
     
 class userDetailsSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
+    user_id = serializers.CharField(source='user.id')
     email = serializers.CharField(source='user.email')  # Access email via user 
     first_name = serializers.CharField(source='user.first_name')  # Access first 
     last_name = serializers.CharField(source='user.last_name')  # Access last name 
 
     class Meta:
         model = Registration
-        fields = ['id','username','email', 'first_name', 'last_name', 'mobile','usertype','mobile','picture']
+        fields = ['id','username','email', 'first_name', 'last_name', 'mobile','usertype','mobile','picture','user_id']
