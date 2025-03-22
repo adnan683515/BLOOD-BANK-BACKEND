@@ -42,9 +42,28 @@ class DonateBlood(models.Model):
     donation_center = models.CharField(max_length=255)  # Location where the donation will take place
     created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for the record creation
     updated_at = models.DateTimeField(auto_now=True)  # Timestamp for the last update
-    
+    totalRequest = models.IntegerField(null=True,blank=True)
     
     
     def __str__(self):
         return f'{self.user.username} {self.bloodType} {self.distics}'
     
+
+
+statusType = [
+    ('pending','pending'),
+    ('Accepted','Accepted')
+]
+
+class BloodRequest(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
+    DonateBlood  = models.ForeignKey(DonateBlood,null=True,blank=True,on_delete=models.CASCADE)
+    numberOfBag = models.IntegerField(null=True,blank=True)
+    donateDate = models.DateField(null=True,blank=True)
+    place = models.CharField(max_length=200,null=True,blank=True)
+    mobile = models.CharField(max_length=12,null=True,blank=True)
+    status = models.CharField(choices=statusType,null=True,blank=True,default='pending')
+    massage = models.TextField(null=True,blank=True)
+    
+    def __str__(self):
+        return f'{self.user.username} {self.DonateBlood}'
