@@ -8,8 +8,17 @@ class SerializerDonation(serializers.ModelSerializer):
         model = DonateBlood
         fields ='__all__'
         
-        
+     
 class SerializerBloodRequest(serializers.ModelSerializer):
+
+    
+    class Meta:
+        model = BloodRequest
+        fields = '__all__'
+     
+        
+class SerializerBloodRequestForGET(serializers.ModelSerializer):
+    user = userAllDataSerializer(read_only=True)
     
     class Meta:
         model = BloodRequest

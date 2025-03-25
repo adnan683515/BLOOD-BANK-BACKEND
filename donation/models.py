@@ -43,7 +43,7 @@ class DonateBlood(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for the record creation
     updated_at = models.DateTimeField(auto_now=True)  # Timestamp for the last update
     totalRequest = models.IntegerField(null=True,blank=True)
-    
+    done  = models.BooleanField(null=True,blank=True,default=False)
     
     def __str__(self):
         return f'{self.user.username} {self.bloodType} {self.distics}'
@@ -64,6 +64,8 @@ class BloodRequest(models.Model):
     mobile = models.CharField(max_length=12,null=True,blank=True)
     status = models.CharField(choices=statusType,null=True,blank=True,default='pending')
     massage = models.TextField(null=True,blank=True)
+    
+    
     
     def __str__(self):
         return f'{self.user.username} {self.DonateBlood}'

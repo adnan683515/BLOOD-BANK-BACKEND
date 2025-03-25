@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializer import SerializerDonation,SerializerBloodRequest
+from .serializer import SerializerDonation,SerializerBloodRequest,SerializerBloodRequestForGET
 from .models import DonateBlood,BloodRequest
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,13 +11,13 @@ from rest_framework import permissions
 class donationView(APIView):
     # permission_classes=[permissions.IsAuthenticated]
     def post(self,request):
-        print("data")
-        print(request.user)
+
         serializer = SerializerDonation(data=request.data)
-        print(request.data.get('user_id'))
+
         if serializer.is_valid():
             obj = serializer.save()
             obj.user = request.user
+            obj.done=True
             obj.save()
             
             return Response('Donation Done')
@@ -40,16 +40,26 @@ class searchDonarUsingBloodType(APIView):
 class donateCardDetails(APIView):
 
     def get(self,request,pk):
-        obj = DonateBlood.objects.get(user=pk)
-        if(obj):
-            serializer = SerializerDonation(obj,many=False)
+            
+            
+        try:
+            # Try to get the object
+            obj = DonateBlood.objects.get(user=pk)
+            
+            serializer = SerializerDonation(obj, many=False)
             return Response(serializer.data)
-        return Response("donate not found please add this")
+        except DonateBlood.DoesNotExist:
+            # Handle the case where the object does not exist
+            print("Something went wrong: Object not found")
+            return Response("Donate record not found, please add this")
+
+
+        
+            
+        
         
         
 class requestBloddApiView(APIView):
-    
-    
     def post(self,request):
         serializer = SerializerBloodRequest(data = request.data)
         if serializer.is_valid():
@@ -57,10 +67,16 @@ class requestBloddApiView(APIView):
             return Response("Blood Request Done")
         
         return Response(serializer.errors)
-    
-    
+
     def get(self,request):
         queryset = BloodRequest.objects.all()
-        serializer = SerializerBloodRequest(queryset,many=True)
+        serializer = SerializerBloodRequestForGET(queryset,many=True)
         return Response(serializer.data)
         
+        
+class bloodRequestShowingByuserId(APIView):
+    
+    def get(self,request,pk):
+        queryset = BloodRequest.objects.filter(DonateBlood=pk)
+        serializer = SerializerBloodRequestForGET(queryset,many=True)
+        return Response(serializer.data)
