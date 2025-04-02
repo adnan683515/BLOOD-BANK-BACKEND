@@ -41,7 +41,6 @@ class donateCardDetails(APIView):
 
     def get(self,request,pk):
             
-            
         try:
             # Try to get the object
             obj = DonateBlood.objects.get(user=pk)

@@ -19,7 +19,7 @@ class SerializerBloodRequest(serializers.ModelSerializer):
         
 class SerializerBloodRequestForGET(serializers.ModelSerializer):
     user = userAllDataSerializer(read_only=True)
-    
+    DonateBlood = SerializerDonation(read_only=True)
     class Meta:
         model = BloodRequest
         fields = '__all__'
