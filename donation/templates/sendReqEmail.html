@@ -1,3 +1,58 @@
-{% comment %} <h1> {{DonateBlood}} </h1> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    
 
-<h1>Hello brother</h1>
+    <div class="card w-96 bg-base-100 shadow-sm">
+        <div class="card-body">
+            <h1>Donate User: {{blood.DonateBlood.user}} </h1>
+        <div class="flex justify-between">
+            <h2 class="text-3xl font-bold">Blood: {{blood.DonateBlood.bloodType}}</h2>
+        </div>
+        <ul class="mt-6 flex flex-col gap-2 text-xs">
+            <li>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Email: {{blood.DonateBlood.user.email}} </span>
+            </li>
+            <li>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Address: {{blood.DonateBlood.address}}  </span>
+            </li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Zila:{{blood.DonateBlood.distics}} </span>
+            </li>
+            
+        </ul>
+        
+        </div>
+    </div>
+
+
+    <div class="card w-96 bg-base-100 shadow-sm">
+        <div class="card-body">
+            <h1>Patient : {{user}} </h1>
+        <div class="flex justify-between">
+            <h2 class="text-3xl bg-green-5000 text-green font-bold">Status: {{blood.status}}</h2>
+        </div>
+        <ul class="mt-2 flex flex-col gap-2 text-xs">
+            <li>
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Email: {{user.email}} </span>
+            </li>
+        
+            
+        </ul>
+        
+        </div>
+    </div>
+
+</body>
+</html>

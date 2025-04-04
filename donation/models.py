@@ -44,7 +44,7 @@ class DonateBlood(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # Timestamp for the last update
     totalRequest = models.IntegerField(null=True,blank=True)
     done  = models.BooleanField(null=True,blank=True,default=False)
-    
+    phone = models.CharField(max_length=14,null=True,blank=True)
     def __str__(self):
         return f'{self.user.username} {self.bloodType} {self.distics}'
     
